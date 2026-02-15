@@ -1,0 +1,88 @@
+window.PVZ = window.PVZ || {};
+
+PVZ.GAME_WIDTH = 900;
+PVZ.GAME_HEIGHT = 600;
+
+// Grid
+PVZ.GRID_ROWS = 5;
+PVZ.GRID_COLS = 9;
+PVZ.CELL_WIDTH = 80;
+PVZ.CELL_HEIGHT = 96;
+PVZ.GRID_OFFSET_X = 100;
+PVZ.GRID_OFFSET_Y = 80;
+
+// Colors
+PVZ.COLORS = {
+    LAWN_LIGHT: 0x5dbf40,
+    LAWN_DARK: 0x4da833,
+    GRID_LINE: 0x3a8a28,
+    SKY: 0x87CEEB,
+    UI_BG: 0x5c3a1e,
+    UI_TEXT: 0xffffff,
+    SUN_YELLOW: 0xffdd00,
+    SUN_GLOW: 0xffee66,
+    HEALTH_GREEN: 0x00ff00,
+    HEALTH_RED: 0xff0000,
+    COOLDOWN_OVERLAY: 0x000000,
+
+    // Plant colors
+    PEASHOOTER_GREEN: 0x44aa44,
+    PEASHOOTER_DARK: 0x338833,
+    SUNFLOWER_YELLOW: 0xffcc00,
+    SUNFLOWER_PETAL: 0xffaa00,
+    SUNFLOWER_CENTER: 0x8b4513,
+    WALLNUT_BROWN: 0x8b6914,
+    WALLNUT_DARK: 0x6b4f10,
+    SNOWPEA_BLUE: 0x44aadd,
+    SNOWPEA_DARK: 0x3388bb,
+    CHERRY_RED: 0xcc2222,
+    CHERRY_DARK: 0x991111,
+    CHERRY_STEM: 0x2d5a1e,
+    REPEATER_GREEN: 0x337733,
+    REPEATER_DARK: 0x225522,
+
+    // Zombie colors
+    ZOMBIE_SKIN: 0x7ab648,
+    ZOMBIE_SHIRT: 0x8b7355,
+    ZOMBIE_PANTS: 0x4a4a4a,
+    CONE_ORANGE: 0xff8c00,
+    BUCKET_GRAY: 0x888888,
+    FLAG_RED: 0xff2222,
+
+    // Projectile
+    PEA_GREEN: 0x66cc66,
+    PEA_FROZEN: 0x66ccff,
+};
+
+// Plant type keys
+PVZ.PLANT_TYPES = {
+    PEASHOOTER: 'peashooter',
+    SUNFLOWER: 'sunflower',
+    WALLNUT: 'wallnut',
+    SNOWPEA: 'snowpea',
+    CHERRYBOMB: 'cherrybomb',
+    REPEATER: 'repeater',
+};
+
+// Zombie type keys
+PVZ.ZOMBIE_TYPES = {
+    REGULAR: 'regular',
+    CONEHEAD: 'conehead',
+    BUCKETHEAD: 'buckethead',
+    FLAG: 'flag',
+};
+
+// Sun
+PVZ.SUN_VALUE = 50;
+PVZ.SUN_SMALL_VALUE = 25;
+PVZ.SUN_DESPAWN_TIME = 8000;
+PVZ.SUN_WARN_TIME = 6000;
+
+// Projectile
+PVZ.PROJECTILE_SPEED = 300;
+
+// Score
+PVZ.SCORE_ZOMBIE_KILL = 100;
+PVZ.SCORE_SUN_COLLECT = 10;
+PVZ.SCORE_LEVEL_COMPLETE = 500;
+PVZ.UPGRADE_COST = 1000;

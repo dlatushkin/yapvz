@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants vs Zombies - Clone</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container"></div>
+
+    <!-- Phaser 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+
+    <!-- Namespace and constants -->
+    <script src="js/constants.js"></script>
+
+    <!-- Data definitions -->
+    <script src="js/data/PlantData.js"></script>
+    <script src="js/data/ZombieData.js"></script>
+    <script src="js/data/LevelData.js"></script>
+
+    <!-- Systems -->
+    <script src="js/systems/SoundManager.js"></script>
+    <script src="js/systems/GridManager.js"></script>
+    <script src="js/systems/SunManager.js"></script>
+    <script src="js/systems/WaveManager.js"></script>
+    <script src="js/systems/PlantBar.js"></script>
+    <script src="js/systems/ScoreManager.js"></script>
+
+    <!-- Entities - base classes first -->
+    <script src="js/entities/Plant.js"></script>
+    <script src="js/entities/Zombie.js"></script>
+    <script src="js/entities/Projectile.js"></script>
+    <script src="js/entities/FrozenPea.js"></script>
+    <script src="js/entities/Sun.js"></script>
+
+    <!-- Plant subclasses -->
+    <script src="js/entities/plants/Peashooter.js"></script>
+    <script src="js/entities/plants/Sunflower.js"></script>
+    <script src="js/entities/plants/WallNut.js"></script>
+    <script src="js/entities/plants/SnowPea.js"></script>
+    <script src="js/entities/plants/CherryBomb.js"></script>
+    <script src="js/entities/plants/Repeater.js"></script>
+
+    <!-- Zombie subclasses -->
+    <script src="js/entities/zombies/RegularZombie.js"></script>
+    <script src="js/entities/zombies/ConeheadZombie.js"></script>
+    <script src="js/entities/zombies/BucketZombie.js"></script>
+    <script src="js/entities/zombies/FlagZombie.js"></script>
+
+    <!-- Scenes -->
+    <script src="js/scenes/BootScene.js"></script>
+    <script src="js/scenes/MenuScene.js"></script>
+    <script src="js/scenes/LevelSelectScene.js"></script>
+    <script src="js/scenes/GameScene.js"></script>
+    <script src="js/scenes/HUDScene.js"></script>
+    <script src="js/scenes/PauseScene.js"></script>
+    <script src="js/scenes/WinScene.js"></script>
+    <script src="js/scenes/LoseScene.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/main.js"></script>
+</body>
+</html>
