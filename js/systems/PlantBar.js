@@ -29,35 +29,35 @@ PVZ.PlantBar = class PlantBar {
             const data = PVZ.PlantData[type];
             const x = startX + i * (cardWidth + gap);
 
-            const card = this.scene.add.rectangle(x, y, cardWidth, cardWidth, 0x4a3520).setInteractive();
-            // const text = this.scene.add.text(x + cardWidth / 2, y + cardHeight / 2, data.name, {
-            //     fontSize: '12px',
-            //     fontFamily: 'Arial',
-            //     color: '#ffffff',
-            //     fontStyle: 'bold'
-            // }).setOrigin(0.5);
+            // const card = this.scene.add.rectangle(x, y, cardWidth, cardWidth, 0x4a3520).setInteractive();
+            // // const text = this.scene.add.text(x + cardWidth / 2, y + cardHeight / 2, data.name, {
+            // //     fontSize: '12px',
+            // //     fontFamily: 'Arial',
+            // //     color: '#ffffff',
+            // //     fontStyle: 'bold'
+            // // }).setOrigin(0.5);
 
-            // btn.on('pointerdown', () => {
-            //     this.onCardClicked(type);
+            // // btn.on('pointerdown', () => {
+            // //     this.onCardClicked(type);
+            // // });
+
+            // card.on('pointerover', () => {
+            //     console.log('Pointer over card:', type);
+            //     if (this.canSelect(type)) {
+            //         card.setScale(1.05);
+            //         // text.setScale(1.05);
+            //     }
             // });
 
-            card.on('pointerover', () => {
-                console.log('Pointer over card:', type);
-                if (this.canSelect(type)) {
-                    card.setScale(1.05);
-                    // text.setScale(1.05);
-                }
-            });
+            // card.on('pointerout', () => {
+            //     card.setScale(1);
+            //     // text.setScale(1);
+            // });
 
-            card.on('pointerout', () => {
-                card.setScale(1);
-                // text.setScale(1);
-            });
-
-            // const container = this.scene.add.container(x, y);
+            const container = this.scene.add.container(x, y);
             // container.setSize(cardWidth, cardHeight);
             // container.setInteractive();
-            // // container.setInteractive(new Phaser.Geom.Rectangle(0, 0, cardWidth, cardHeight), Phaser.Geom.Rectangle.Contains);
+            container.setInteractive(new Phaser.Geom.Rectangle(0, 0, cardWidth, cardHeight), Phaser.Geom.Rectangle.Contains);
             // container.setDepth(1000);
             // console.log('Created interactive container for:', type);
 
@@ -111,13 +111,13 @@ PVZ.PlantBar = class PlantBar {
             //     console.log('pointermove on card: ', type, ' ', pointer.worldX, ' ', pointer.worldY);
             // });
 
-            // container.on('pointerover', (pointer, localX, localY, event) => {
-            //     console.log('pointover: ', type, ' ', pointer.worldX, ' ', pointer.worldY);
-            //     // console.log('Pointer over card:', type, 'Scene active:', this.scene.scene.isActive(), 'Depth:', container.depth);
-            //     // if (this.canSelect(type)) {
-            //     //     container.setScale(1.05);
-            //     // }
-            // });
+            container.on('pointerover', (pointer, localX, localY, event) => {
+                console.log('pointover: ', type, ' ', pointer.worldX, ' ', pointer.worldY);
+                // console.log('Pointer over card:', type, 'Scene active:', this.scene.scene.isActive(), 'Depth:', container.depth);
+                // if (this.canSelect(type)) {
+                //     container.setScale(1.05);
+                // }
+            });
 
             // // container.on('pointerout', () => {
             // //     console.log('Pointer out card:', type);
@@ -138,7 +138,6 @@ PVZ.PlantBar = class PlantBar {
     }
 
     canSelect(type) {
-        console.log('canSelect');
         const data = PVZ.PlantData[type];
         const gameScene = this.scene.scene.get('GameScene');
         if (!gameScene || !gameScene.sunManager) return false;
