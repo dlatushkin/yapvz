@@ -43,14 +43,14 @@ PVZ.HUDScene = class HUDScene extends Phaser.Scene {
         }).setOrigin(0, 0.5);
         this.scoreText.setDepth(100);
 
-        // // Wave text
-        // this.waveText = this.add.text(PVZ.GAME_WIDTH - 10, 15, '', {
-        //     fontSize: '14px',
-        //     fontFamily: 'Arial',
-        //     color: '#ffffff',
-        //     fontStyle: 'bold'
-        // }).setOrigin(1, 0);
-        // this.waveText.setDepth(100);
+        // Wave text
+        this.waveText = this.add.text(PVZ.GAME_WIDTH - 10, 15, '', {
+            fontSize: '14px',
+            fontFamily: 'Arial',
+            color: '#ffffff',
+            fontStyle: 'bold'
+        }).setOrigin(1, 0);
+        this.waveText.setDepth(100);
 
         // Level name
         this.add.text(PVZ.GAME_WIDTH - 10, 35, this.levelData.name, {
@@ -59,54 +59,54 @@ PVZ.HUDScene = class HUDScene extends Phaser.Scene {
             color: '#aaaaaa'
         }).setOrigin(1, 0).setDepth(100);
 
-        // // Pause button
-        // const pauseBtn = this.add.text(PVZ.GAME_WIDTH - 10, 55, '⏸ Pause', {
-        //     fontSize: '14px',
-        //     fontFamily: 'Arial',
-        //     color: '#ffffff',
-        //     backgroundColor: '#4a3520',
-        //     padding: { x: 8, y: 4 }
-        // }).setOrigin(1, 0).setInteractive();
-        // pauseBtn.setDepth(100);
+        // Pause button
+        const pauseBtn = this.add.text(PVZ.GAME_WIDTH - 10, 55, '⏸ Pause', {
+            fontSize: '14px',
+            fontFamily: 'Arial',
+            color: '#ffffff',
+            backgroundColor: '#4a3520',
+            padding: { x: 8, y: 4 }
+        }).setOrigin(1, 0).setInteractive();
+        pauseBtn.setDepth(100);
 
-        // pauseBtn.on('pointerdown', () => {
-        //     PVZ.SoundManager.play('button_click');
-        //     this.scene.pause('GameScene');
-        //     this.scene.pause('HUDScene');
-        //     this.scene.launch('PauseScene');
-        // });
+        pauseBtn.on('pointerdown', () => {
+            PVZ.SoundManager.play('button_click');
+            this.scene.pause('GameScene');
+            this.scene.pause('HUDScene');
+            this.scene.launch('PauseScene');
+        });
 
-        // // Wave warning text (hidden initially)
-        // this.warningText = this.add.text(PVZ.GAME_WIDTH / 2, PVZ.GAME_HEIGHT / 2, '', {
-        //     fontSize: '28px',
-        //     fontFamily: 'Arial',
-        //     color: '#ff4444',
-        //     fontStyle: 'bold',
-        //     stroke: '#000000',
-        //     strokeThickness: 4
-        // }).setOrigin(0.5).setAlpha(0).setDepth(200);
+        // Wave warning text (hidden initially)
+        this.warningText = this.add.text(PVZ.GAME_WIDTH / 2, PVZ.GAME_HEIGHT / 2, '', {
+            fontSize: '28px',
+            fontFamily: 'Arial',
+            color: '#ff4444',
+            fontStyle: 'bold',
+            stroke: '#000000',
+            strokeThickness: 4
+        }).setOrigin(0.5).setAlpha(0).setDepth(200);
 
-        // // Event listeners
-        // this.game.events.on('sun-changed', (amount) => {
-        //     this.sunText.setText(amount.toString());
-        // });
+        // Event listeners
+        this.game.events.on('sun-changed', (amount) => {
+            this.sunText.setText(amount.toString());
+        });
 
-        // this.game.events.on('score-changed', (score) => {
-        //     this.scoreText.setText('Score: ' + score);
-        // });
+        this.game.events.on('score-changed', (score) => {
+            this.scoreText.setText('Score: ' + score);
+        });
 
-        // this.game.events.on('wave-start', (current, total) => {
-        //     this.waveText.setText('Wave ' + current + '/' + total);
-        // });
+        this.game.events.on('wave-start', (current, total) => {
+            this.waveText.setText('Wave ' + current + '/' + total);
+        });
 
-        // this.game.events.on('wave-warning', () => {
-        //     this.showWarning('A HUGE WAVE IS APPROACHING!');
-        // });
+        this.game.events.on('wave-warning', () => {
+            this.showWarning('A HUGE WAVE IS APPROACHING!');
+        });
 
-        // this.game.events.on('plant-placed', (type) => {
-        //     this.plantBar.startCooldown(type);
-        //     this.plantBar.selectedPlant = null;
-        // });
+        this.game.events.on('plant-placed', (type) => {
+            this.plantBar.startCooldown(type);
+            this.plantBar.selectedPlant = null;
+        });
     }
 
     showWarning(text) {

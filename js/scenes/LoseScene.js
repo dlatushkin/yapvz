@@ -48,7 +48,7 @@ PVZ.LoseScene = class LoseScene extends Phaser.Scene {
         retryBtn.on('pointerdown', () => {
             PVZ.SoundManager.play('button_click');
             this.scene.stop('GameScene');
-            this.scene.stop('HUDScene');
+            // this.scene.stop('HUDScene');
             this.scene.stop();
             this.scene.start('GameScene', { levelId: this.levelId });
         });
