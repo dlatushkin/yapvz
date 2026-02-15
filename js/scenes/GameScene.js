@@ -17,36 +17,36 @@ PVZ.GameScene = class GameScene extends Phaser.Scene {
 
         // Initialize managers
         this.gridManager = new PVZ.GridManager(this);
-        // this.sunManager = new PVZ.SunManager(this, this.levelData.startingSun);
-        // this.sunManager.setInterval(this.levelData.naturalSunInterval);
-        // this.scoreManager = new PVZ.ScoreManager(this);
-        // this.waveManager = new PVZ.WaveManager(this, this.levelData);
+        this.sunManager = new PVZ.SunManager(this, this.levelData.startingSun);
+        this.sunManager.setInterval(this.levelData.naturalSunInterval);
+        this.scoreManager = new PVZ.ScoreManager(this);
+        this.waveManager = new PVZ.WaveManager(this, this.levelData);
 
-        // // Groups (non-physics, we handle collisions manually)
-        // this.plantsGroup = this.add.group();
-        // this.zombiesGroup = this.add.group();
-        // this.projectilesGroup = this.add.group();
+        // Groups (non-physics, we handle collisions manually)
+        this.plantsGroup = this.add.group();
+        this.zombiesGroup = this.add.group();
+        this.projectilesGroup = this.add.group();
 
         // Draw lawn
         this.gridManager.drawLawn();
 
-        // // Grid click for plant placement
-        // this.input.on('pointerdown', (pointer) => {
-        //     if (pointer.rightButtonDown()) {
-        //         this.cancelPlacement();
-        //     } else {
-        //         this.onGridClick(pointer);
-        //     }
-        // });
+        // Grid click for plant placement
+        this.input.on('pointerdown', (pointer) => {
+            if (pointer.rightButtonDown()) {
+                this.cancelPlacement();
+            } else {
+                this.onGridClick(pointer);
+            }
+        });
 
-        // this.input.keyboard.on('keydown-ESC', () => {
-        //     this.cancelPlacement();
-        // });
+        this.input.keyboard.on('keydown-ESC', () => {
+            this.cancelPlacement();
+        });
 
-        // // Preview sprite that follows cursor
-        // this.input.on('pointermove', (pointer) => {
-        //     this.updatePlacementPreview(pointer);
-        // });
+        // Preview sprite that follows cursor
+        this.input.on('pointermove', (pointer) => {
+            this.updatePlacementPreview(pointer);
+        });
 
         // Event listeners
         this.game.events.on('plant-selected', (type) => {
@@ -60,32 +60,32 @@ PVZ.GameScene = class GameScene extends Phaser.Scene {
             }
         });
 
-        // this.game.events.on('level-complete', () => {
-        //     if (this.gameOver) return;
-        //     this.gameOver = true;
-        //     this.scoreManager.addScore(PVZ.SCORE_LEVEL_COMPLETE);
-        //     this.scoreManager.saveLevelScore(this.levelId);
-        //     this.scene.pause('GameScene');
-        //     this.scene.pause('HUDScene');
-        //     this.scene.launch('WinScene', {
-        //         score: this.scoreManager.getScore(),
-        //         levelId: this.levelId
-        //     });
-        // });
+        this.game.events.on('level-complete', () => {
+            if (this.gameOver) return;
+            this.gameOver = true;
+            this.scoreManager.addScore(PVZ.SCORE_LEVEL_COMPLETE);
+            this.scoreManager.saveLevelScore(this.levelId);
+            this.scene.pause('GameScene');
+            this.scene.pause('HUDScene');
+            this.scene.launch('WinScene', {
+                score: this.scoreManager.getScore(),
+                levelId: this.levelId
+            });
+        });
 
-        // this.game.events.on('game-over', () => {
-        //     if (this.gameOver) return;
-        //     this.gameOver = true;
-        //     this.scene.pause('GameScene');
-        //     this.scene.pause('HUDScene');
-        //     this.scene.launch('LoseScene', {
-        //         levelId: this.levelId
-        //     });
-        // });
+        this.game.events.on('game-over', () => {
+            if (this.gameOver) return;
+            this.gameOver = true;
+            this.scene.pause('GameScene');
+            this.scene.pause('HUDScene');
+            this.scene.launch('LoseScene', {
+                levelId: this.levelId
+            });
+        });
 
-        // // Preview graphics layer
-        // this.previewGraphics = this.add.graphics();
-        // this.previewGraphics.setDepth(50);
+        // Preview graphics layer
+        this.previewGraphics = this.add.graphics();
+        this.previewGraphics.setDepth(50);
 
         // Launch HUD
         this.scene.launch('HUDScene', {
@@ -93,11 +93,11 @@ PVZ.GameScene = class GameScene extends Phaser.Scene {
             levelId: this.levelId
         });
 
-        // // Start waves
-        // this.waveManager.start();
+        // Start waves
+        this.waveManager.start();
 
-        // // Emit initial sun value
-        // this.game.events.emit('sun-changed', this.sunManager.currentSun);
+        // Emit initial sun value
+        this.game.events.emit('sun-changed', this.sunManager.currentSun);
     }
 
     updatePlacementPreview(pointer) {
@@ -238,41 +238,41 @@ PVZ.GameScene = class GameScene extends Phaser.Scene {
     update(time, delta) {
         if (this.gameOver) return;
 
-        // // Update all plants
-        // this.plantsGroup.getChildren().forEach(plant => {
-        //     if (plant.update) plant.update(time, delta);
-        // });
+        // Update all plants
+        this.plantsGroup.getChildren().forEach(plant => {
+            if (plant.update) plant.update(time, delta);
+        });
 
-        // // Update all zombies
-        // this.zombiesGroup.getChildren().forEach(zombie => {
-        //     if (!zombie.isAlive) return;
-        //     if (zombie.update) zombie.update(time, delta);
-        //     this.checkZombieEating(zombie);
+        // Update all zombies
+        this.zombiesGroup.getChildren().forEach(zombie => {
+            if (!zombie.isAlive) return;
+            if (zombie.update) zombie.update(time, delta);
+            this.checkZombieEating(zombie);
 
-        //     // Check if zombie reached the house
-        //     if (zombie.x < PVZ.GRID_OFFSET_X - 40) {
-        //         this.game.events.emit('game-over');
-        //     }
-        // });
+            // Check if zombie reached the house
+            if (zombie.x < PVZ.GRID_OFFSET_X - 40) {
+                this.game.events.emit('game-over');
+            }
+        });
 
-        // // Update projectiles (remove off-screen)
-        // this.projectilesGroup.getChildren().forEach(proj => {
-        //     if (proj.update) proj.update();
-        // });
+        // Update projectiles (remove off-screen)
+        this.projectilesGroup.getChildren().forEach(proj => {
+            if (proj.update) proj.update();
+        });
 
-        // // Manual collision detection
-        // this.checkProjectileCollisions();
+        // Manual collision detection
+        this.checkProjectileCollisions();
 
-        // // Update suns
-        // if (this.sunManager.sunsGroup) {
-        //     this.sunManager.sunsGroup.getChildren().forEach(sun => {
-        //         if (sun.update) sun.update(time, delta);
-        //     });
-        // }
+        // Update suns
+        if (this.sunManager.sunsGroup) {
+            this.sunManager.sunsGroup.getChildren().forEach(sun => {
+                if (sun.update) sun.update(time, delta);
+            });
+        }
 
-        // // Update managers
-        // this.sunManager.update(time, delta);
-        // this.waveManager.update(time, delta);
+        // Update managers
+        this.sunManager.update(time, delta);
+        this.waveManager.update(time, delta);
     }
 
     shutdown() {

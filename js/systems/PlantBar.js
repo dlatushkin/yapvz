@@ -24,116 +24,82 @@ PVZ.PlantBar = class PlantBar {
         const gap = 5;
 
         this.availablePlants.forEach((type, i) => {
-            console.log('Creating card for plant type:', type);
-
             const data = PVZ.PlantData[type];
             const x = startX + i * (cardWidth + gap);
 
-            // const card = this.scene.add.rectangle(x, y, cardWidth, cardWidth, 0x4a3520).setInteractive();
-            // // const text = this.scene.add.text(x + cardWidth / 2, y + cardHeight / 2, data.name, {
-            // //     fontSize: '12px',
-            // //     fontFamily: 'Arial',
-            // //     color: '#ffffff',
-            // //     fontStyle: 'bold'
-            // // }).setOrigin(0.5);
-
-            // // btn.on('pointerdown', () => {
-            // //     this.onCardClicked(type);
-            // // });
-
-            // card.on('pointerover', () => {
-            //     console.log('Pointer over card:', type);
-            //     if (this.canSelect(type)) {
-            //         card.setScale(1.05);
-            //         // text.setScale(1.05);
-            //     }
-            // });
-
-            // card.on('pointerout', () => {
-            //     card.setScale(1);
-            //     // text.setScale(1);
-            // });
-
             const container = this.scene.add.container(x, y);
             // container.setSize(cardWidth, cardHeight);
-            // container.setInteractive();
             container.setInteractive(new Phaser.Geom.Rectangle(0, 0, cardWidth, cardHeight), Phaser.Geom.Rectangle.Contains);
-            // container.setDepth(1000);
-            // console.log('Created interactive container for:', type);
+            container.setDepth(100);
 
-            // // Card background
-            // const bg = this.scene.add.graphics();
-            // // bg.fillStyle(0x4a3520, 1);
-            // // bg.fillRoundedRect(0, 0, cardWidth, cardHeight, 4);
-            // bg.lineStyle(2, 0x8b7355, 1);
-            // bg.strokeRoundedRect(0, 0, cardWidth, cardHeight, 4);
-            // container.add(bg);
+            // Card background
+            const bg = this.scene.add.graphics();
+            bg.fillStyle(0x4a3520, 1);
+            bg.fillRoundedRect(0, 0, cardWidth, cardHeight, 4);
+            bg.lineStyle(2, 0x8b7355, 1);
+            bg.strokeRoundedRect(0, 0, cardWidth, cardHeight, 4);
+            container.add(bg);
 
-            // // // // Plant icon
-            // // // const icon = this.scene.add.image(cardWidth / 2, 22, data.textureKey);
-            // // // icon.setScale(0.5);
-            // // // container.add(icon);
+            // Plant icon
+            const icon = this.scene.add.image(cardWidth / 2, 22, data.textureKey);
+            icon.setScale(0.5);
+            container.add(icon);
 
-            // // // // Cost text
-            // // // const costText = this.scene.add.text(cardWidth / 2, 48, data.cost.toString(), {
-            // // //     fontSize: '12px',
-            // // //     fontFamily: 'Arial',
-            // // //     color: '#ffdd00',
-            // // //     fontStyle: 'bold'
-            // // // }).setOrigin(0.5);
-            // // // container.add(costText);
+            // Cost text
+            const costText = this.scene.add.text(cardWidth / 2, 48, data.cost.toString(), {
+                fontSize: '12px',
+                fontFamily: 'Arial',
+                color: '#ffdd00',
+                fontStyle: 'bold'
+            }).setOrigin(0.5);
+            container.add(costText);
 
-            // // // // Cooldown overlay
-            // // // const cooldownOverlay = this.scene.add.graphics();
-            // // // cooldownOverlay.setAlpha(0);
-            // // // container.add(cooldownOverlay);
+            // Cooldown overlay
+            const cooldownOverlay = this.scene.add.graphics();
+            cooldownOverlay.setAlpha(0);
+            container.add(cooldownOverlay);
 
-            // // // // Affordability overlay
-            // // // const affordOverlay = this.scene.add.graphics();
-            // // // container.add(affordOverlay);
+            // Affordability overlay
+            const affordOverlay = this.scene.add.graphics();
+            container.add(affordOverlay);
 
-            // // // // Cooldown timer text
-            // // // const cooldownText = this.scene.add.text(cardWidth / 2, cardHeight / 2, '', {
-            // // //     fontSize: '14px',
-            // // //     fontFamily: 'Arial',
-            // // //     color: '#ffffff',
-            // // //     fontStyle: 'bold',
-            // // //     stroke: '#000000',
-            // // //     strokeThickness: 2
-            // // // }).setOrigin(0.5).setAlpha(0);
-            // // // container.add(cooldownText);
+            // Cooldown timer text
+            const cooldownText = this.scene.add.text(cardWidth / 2, cardHeight / 2, '', {
+                fontSize: '14px',
+                fontFamily: 'Arial',
+                color: '#ffffff',
+                fontStyle: 'bold',
+                stroke: '#000000',
+                strokeThickness: 2
+            }).setOrigin(0.5).setAlpha(0);
+            container.add(cooldownText);
 
-            // // container.on('pointerdown', () => {
-            // //     this.onCardClicked(type);
-            // // });
-
-            // container.on('pointermove', (pointer, localX, localY, event) => {
-            //     console.log('pointermove on card: ', type, ' ', pointer.worldX, ' ', pointer.worldY);
-            // });
-
-            container.on('pointerover', (pointer, localX, localY, event) => {
-                console.log('pointover: ', type, ' ', pointer.worldX, ' ', pointer.worldY);
-                // console.log('Pointer over card:', type, 'Scene active:', this.scene.scene.isActive(), 'Depth:', container.depth);
-                // if (this.canSelect(type)) {
-                //     container.setScale(1.05);
-                // }
+            container.on('pointerdown', () => {
+                this.onCardClicked(type);
             });
 
-            // // container.on('pointerout', () => {
-            // //     console.log('Pointer out card:', type);
-            // //     container.setScale(1);
-            // // });
+            container.on('pointerover', (pointer, localX, localY, event) => {
+                console.log('Pointer over card:', type, 'Scene active:', this.scene.scene.isActive(), 'Depth:', container.depth);
+                if (this.canSelect(type)) {
+                    container.setScale(1.05);
+                }
+            });
 
-            // // // this.cards.push({
-            // // //     type,
-            // // //     container,
-            // // //     bg,
-            // // //     cooldownOverlay,
-            // // //     affordOverlay,
-            // // //     cooldownText,
-            // // //     cardWidth,
-            // // //     cardHeight
-            // // // });
+            container.on('pointerout', () => {
+                console.log('Pointer out card:', type);
+                container.setScale(1);
+            });
+
+            this.cards.push({
+                type,
+                container,
+                bg,
+                cooldownOverlay,
+                affordOverlay,
+                cooldownText,
+                cardWidth,
+                cardHeight
+            });
         });
     }
 
