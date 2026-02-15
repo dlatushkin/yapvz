@@ -85,7 +85,7 @@ PVZ.WinScene = class WinScene extends Phaser.Scene {
             nextBtn.on('pointerdown', () => {
                 PVZ.SoundManager.play('button_click');
                 this.scene.stop('GameScene');
-                this.scene.stop('HUDScene');
+                // this.scene.stop('HUDScene');
                 this.scene.stop();
                 this.scene.start('GameScene', { levelId: nextLevelId });
             });
@@ -103,7 +103,7 @@ PVZ.WinScene = class WinScene extends Phaser.Scene {
         menuBtn.on('pointerdown', () => {
             PVZ.SoundManager.play('button_click');
             this.scene.stop('GameScene');
-            this.scene.stop('HUDScene');
+            // this.scene.stop('HUDScene');
             this.scene.stop();
             this.scene.start('LevelSelectScene');
         });
