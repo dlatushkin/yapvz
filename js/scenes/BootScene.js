@@ -13,8 +13,9 @@ PVZ.BootScene = class BootScene extends Phaser.Scene {
 
     preload() {
         // Load any assets needed for the menu or preloader here
-        this.load.image('plant_sunflower', 'assets/sunflower.bmp');
+        this.load.image('plant_sunflower', 'assets/images/suhflower1.png');
     }
+
 
     generateTextures() {
         const gfx = this.add.graphics();
