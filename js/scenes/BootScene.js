@@ -11,6 +11,12 @@ PVZ.BootScene = class BootScene extends Phaser.Scene {
         this.scene.start('MenuScene');
     }
 
+    preload() {
+        // Load any assets needed for the menu or preloader here
+        this.load.image('plant_sunflower', 'assets/images/suhflower1.png');
+    }
+
+
     generateTextures() {
         const gfx = this.add.graphics();
 
@@ -28,27 +34,27 @@ PVZ.BootScene = class BootScene extends Phaser.Scene {
         gfx.fillRect(34, 22, 14, 8); // mouth/barrel
         gfx.generateTexture('plant_peashooter', 48, 60);
 
-        // --- Sunflower ---
-        gfx.clear();
-        // Petals
-        for (let i = 0; i < 8; i++) {
-            const angle = (i / 8) * Math.PI * 2;
-            const px = 24 + Math.cos(angle) * 16;
-            const py = 24 + Math.sin(angle) * 16;
-            gfx.fillStyle(PVZ.COLORS.SUNFLOWER_PETAL, 1);
-            gfx.fillCircle(px, py, 8);
-        }
-        gfx.fillStyle(PVZ.COLORS.SUNFLOWER_CENTER, 1);
-        gfx.fillCircle(24, 24, 12); // center
-        gfx.fillStyle(PVZ.COLORS.SUNFLOWER_YELLOW, 1);
-        gfx.fillCircle(24, 22, 10);
-        gfx.fillStyle(0x000000, 1);
-        gfx.fillCircle(21, 21, 2); // eyes
-        gfx.fillCircle(27, 21, 2);
-        // Stem
-        gfx.fillStyle(0x2d5a1e, 1);
-        gfx.fillRect(21, 38, 6, 22);
-        gfx.generateTexture('plant_sunflower', 48, 60);
+        // // --- Sunflower ---
+        // gfx.clear();
+        // // Petals
+        // for (let i = 0; i < 8; i++) {
+        //     const angle = (i / 8) * Math.PI * 2;
+        //     const px = 24 + Math.cos(angle) * 16;
+        //     const py = 24 + Math.sin(angle) * 16;
+        //     gfx.fillStyle(PVZ.COLORS.SUNFLOWER_PETAL, 1);
+        //     gfx.fillCircle(px, py, 8);
+        // }
+        // gfx.fillStyle(PVZ.COLORS.SUNFLOWER_CENTER, 1);
+        // gfx.fillCircle(24, 24, 12); // center
+        // gfx.fillStyle(PVZ.COLORS.SUNFLOWER_YELLOW, 1);
+        // gfx.fillCircle(24, 22, 10);
+        // gfx.fillStyle(0x000000, 1);
+        // gfx.fillCircle(21, 21, 2); // eyes
+        // gfx.fillCircle(27, 21, 2);
+        // // Stem
+        // gfx.fillStyle(0x2d5a1e, 1);
+        // gfx.fillRect(21, 38, 6, 22);
+        // gfx.generateTexture('plant_sunflower', 48, 60);
 
         // --- Wall-nut ---
         gfx.clear();
